@@ -11,5 +11,6 @@ After that, you can start the development server using `npx vite` or `npm run de
 
 ### Other available scripts
 
+- Code formating (Eslint & Prettier): `npm run format`
 - Production build: `npx build`
 - Production preview: `npx preview`
