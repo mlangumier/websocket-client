@@ -1,7 +1,15 @@
 import "./style.css";
 // import { setupCounter } from "./counter.ts";
+const socket = new WebSocket("ws://localhost:8080");
 
-// document.querySelector<HTMLDivElement>("#app")!.innerHTML = ``;
-// setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
+socket.onopen = () => {
+  console.log("✅ Connecté au serveur WebSocket");
+}
 
-// init commit
+socket.onerror = (err) => {
+    console.error("❌ Erreur WebSocket :", err);
+};
+
+socket.onclose = () => {
+    console.warn("⚠️ Connexion fermée");
+};
