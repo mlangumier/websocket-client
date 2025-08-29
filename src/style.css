@@ -52,10 +52,10 @@ h1 {
 }
 
 p {
-  font-size: 2rem;
+  font-size: 1rem;
   color: #fff;
   text-shadow: 0 0 5px rgb(0, 255, 81), 0 0 10px rgb(0, 255, 81), 0 0 20px rgb(0, 255, 81), 0 0 40px rgb(0, 255, 81), 0 0 80px rgb(0, 255, 81);
-  padding: 20px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -252,7 +252,7 @@ button.startGame:active .find {
       margin-bottom: 3rem;
     }
 
-    #cont {
+    #bigCont {
         width: 100%;
         height: 80%;
         display: flex;
@@ -262,7 +262,7 @@ button.startGame:active .find {
         margin-bottom: 2rem;
     }
 
-    #smallcont {
+    #cont {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         width: 50vh;
@@ -292,3 +292,9 @@ button.startGame:active .find {
     #head h1 {
         font-size: 6vmin;
     }
+
+.loading {
+  width: 150px;
+  margin: 1rem;
+  opacity: 0.5;
+}
