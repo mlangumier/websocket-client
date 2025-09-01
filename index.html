@@ -1,52 +1,48 @@
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="src\style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe Websockets</title>
   </head>
 
   <body>
     <div id="app">
-
-    <div id="game-name">
+      <div id="game-name">
         <h1 class="neon-text">TIC-TAC-TOE</h1>
-    </div>
+      </div>
 
-    <div>
-      <p id="userCont">You : <span id=""></span></p>
-      <p id="oppNameCont">Opponent : <span id="oppName"></span></p>
-    </div>
-    <br>
-    <p id="valueCont">Your are playing as <span id="value"></span></p>
-    <br>
-    <p id="whosTurn"> X's Turn</p>
+      <div>
+        <p id="userCont">You : <span id=""></span></p>
+        <p id="oppNameCont">Opponent : <span id="oppName"></span></p>
+      </div>
+      <br />
+      <p id="valueCont">Your are playing as <span id="value"></span></p>
+      <br />
+      <p id="whosTurn">X's Turn</p>
 
-    <div class="inputGroup">
-      <p id="enterName">Enter your name : </p> 
-      <input type="text" placeholder="Name" id="name" autocomplete="off">
-    </div>
+      <div class="inputGroup">
+        <p id="enterName">Enter your name :</p>
+        <input type="text" placeholder="Name" id="name" autocomplete="off" />
+      </div>
 
-    <button id="find" class="startGame">Search for a player</button>
+      <button id="find" class="startGame">Search for a player</button>
 
-    <div id="cont">
+      <div id="cont">
         <div id="smallcont">
-          <button id="btn1" class="btn btno" name="tictic-button">o</button>
-          <button id="btn2" class="btn btnx" name="tictic-button">x</button>
-          <button id="btn3" class="btn btnx" name="tictic-button">x</button>
-          <button id="btn4" class="btn btnx" name="tictic-button">x</button>
-          <button id="btn5" class="btn btno" name="tictic-button">o</button>
-          <button id="btn6" class="btn btnx" name="tictic-button">o</button>
-          <button id="btn7" class="btn btno" name="tictic-button">o</button>
-          <button id="btn8" class="btn btno" name="tictic-button">o</button>
-          <button id="btn9" class="btn btnx" name="tictic-button">x</button>
+          <button id="btn1" class="btn" name="tictic-button"></button>
+          <button id="btn2" class="btn" name="tictic-button"></button>
+          <button id="btn3" class="btn" name="tictic-button"></button>
+          <button id="btn4" class="btn" name="tictic-button"></button>
+          <button id="btn5" class="btn" name="tictic-button"></button>
+          <button id="btn6" class="btn" name="tictic-button"></button>
+          <button id="btn7" class="btn" name="tictic-button"></button>
+          <button id="btn8" class="btn" name="tictic-button"></button>
+          <button id="btn9" class="btn" name="tictic-button"></button>
         </div>
-    </div>
-    <br>
-
+      </div>
+      <br />
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -37,19 +37,19 @@ h1 {
   color: rgb(0, 175, 0);
 }
 .neon-text {
-            font-size: 75px;
-            color: #fff;
-            text-shadow:
-                0 0 5px rgb(0, 255, 81),
-                0 0 10px rgb(0, 255, 81),
-                0 0 20px rgb(0, 255, 81),
-                0 0 40px rgb(0, 255, 81),
-                0 0 80px rgb(0, 255, 81);
-            padding: 20px;
-            text-align: center;         
-            align-items: center;
-            justify-content: center;
-        }
+  font-size: 75px;
+  color: #fff;
+  text-shadow:
+    0 0 5px rgb(0, 255, 81),
+    0 0 10px rgb(0, 255, 81),
+    0 0 20px rgb(0, 255, 81),
+    0 0 40px rgb(0, 255, 81),
+    0 0 80px rgb(0, 255, 81);
+  padding: 20px;
+  text-align: center;         
+  align-items: center;
+  justify-content: center;
+}
 
 p {
   font-size: 2rem;
@@ -239,10 +239,10 @@ button.startGame:active .find {
 }
 
 * {
-        margin: 0;
-        padding: 0;
-        justify-content: center;
-        align-items: center;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
     }
 
     #game-name{
