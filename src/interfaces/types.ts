@@ -9,12 +9,13 @@ export interface IPlayer {
 }
 
 export interface IServerMessage {
-  type: "GAME_START" | "UPDATE" | "GAME_OVER" | "ERROR";
-  content : {
-    players?: IPlayer[];
-    board?: string[]; // état du plateau (9 cases, "X" | "O" | "")
-    winner?: string | null;
-    currentTurn: string | null;
-    message?: string;
-  }
+  type: "GAME_START" | "PLAYER_INFO" | "UPDATE" | "GAME_OVER" | "ERROR";
+  players: {
+    player1: IPlayer | null;
+    player2: IPlayer | null;
+  };
+  board?: (string | null)[]; // état du plateau (9 cases, "X" | "O" | "")
+  winner?: string | null;
+  currentTurn: string | null;
+  message?: any;
 }
