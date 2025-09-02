@@ -1,14 +1,19 @@
 import "./style.css";
-import { onMessage,  sendMessage } from "./websocket";
+import { onMessage, sendMessage } from "./websocket";
 import { handleGameMessage } from "./game";
 
-const playerName = document.getElementById("playerName")?.innerText;
+const confirmBtn = document.getElementById("confirmBtn");
+const nameInputElement = document.getElementById("playerName");
 
-const confirmBtn = document.getElementById("sendMessage");
+confirmBtn?.addEventListener("click", () => {
+  if (!nameInputElement) {
+    throw new Error("Couldn't input player name");
+  }
+  const playerName: string = (
+    nameInputElement as HTMLInputElement
+  ).value.trim();
 
-confirmBtn?.addEventListener("click" ,() => {
-  sendMessage({type : "ADD_PLAYER", content: playerName});
-  console.log(confirmBtn.innerHTML);
+  sendMessage({ type: "ADD_PLAYER", content: playerName });
 });
 
 onMessage(msg => {
