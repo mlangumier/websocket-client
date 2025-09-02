@@ -4,7 +4,7 @@ export interface IMessage {
 }
 
 export interface IPlayer {
-  player: string;
+  name: string;
   symbol: "X" | "O";
 }
 
