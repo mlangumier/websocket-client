@@ -2,7 +2,7 @@ import type { IPlayer, IServerMessage } from "./interfaces/types";
 import { sendMessage } from "./websocket";
 
 const cells = document.querySelectorAll<HTMLAnchorElement>(".btn");
-let player: IPlayer | null = null;
+let player: IPlayer | null;
 let gameData: IServerMessage = {
   type: "ERROR",
   players: {
@@ -21,21 +21,23 @@ cells.forEach((cell, index) => {
 
 export function handleGameMessage(msg: IServerMessage) {
   gameData = { ...msg };
-  if (msg.board) renderBoard(msg.board); //ERROR: always same symbol, fix SERVER!!
 
   // Get & render game board
+  if (msg.board) renderBoard(msg.board); //ERROR: always same symbol, fix SERVER!!
 
   switch (msg.type) {
     case "PLAYER_INFO": {
-      // Only the player who entered their name receives msg.message
+      // Only the player who entered their name receives msg.message -> Keep in `player` variable
       if (msg.message?.symbol) {
         player = msg.message; // Player's name & symbol
       }
       break;
     }
     case "GAME_START":
-      console.log("Game Start !");
-      // Get msg.currentPlayer & remove btn.disabled for this player if player.name === msg.currentPlayer
+      if (msg.message?.symbol) {
+        player = msg.message;
+      }
+      // Disable buttons except if `player.name` === `msg.currentPlayer`
       break;
     case "UPDATE":
       console.log("Update board");
