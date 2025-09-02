@@ -1,6 +1,5 @@
 
-# 🎮 Tic-Tac-Toe WebSockets
-
+# ❌🔵 Tic-Tac-Toe WebSockets 🔵❌
   
 
 A **Tic-Tac-Toe** game playable in **real-time** between two players via the browser.
@@ -89,7 +88,7 @@ https://stackoverflow.com/
 
   
 
-## 🔍 Flowchart (Game Logic)
+## 🎮 Game Logic
 
   
 
@@ -183,3 +182,15 @@ Manages events like “player joined”, “move played”, “game over”.
   
 
 **How it works:** Uses WebSockets (with fallback if the browser doesn’t support them) to send and receive data continuously.
+
+
+
+**Screenshots**
+
+![image](files:public\img\Interface1.png)
+![image](files:public\img\Interface2.png) 
+![image](files:public\img\Interface3.png) 
+![image](files:public\img\Interface4.png) 
+![image](files:public\img\Interface5.png) 
+![image](files:public\img\Interface6.png) 
+![image](files:public\img\Interface7.png) 
