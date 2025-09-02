@@ -8,6 +8,7 @@ const confirmBtn = document.getElementById("sendMessage");
 
 confirmBtn?.addEventListener("click" ,() => {
   sendMessage({type : "ADD_PLAYER", content: playerName});
+  console.log(confirmBtn.innerHTML);
 });
 
 onMessage(msg => {
