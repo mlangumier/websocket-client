@@ -15,18 +15,18 @@ This project uses **Node.js, Express, and Socket.IO** to manage player connectio
 ```bash
 
 # Clone the repository
-git clone https://github.com/mlangumier/websocket-client/tree/test-ameliah
+git clone https://github.com/mlangumier/websocket-client/tree/test-separation-logic-ameliah
 
 # Navigate to the project folder
-cd test-ameliah
+cd test-separation-logic-ameliah
 
 # Install dependencies
 npm install -g express http nodemon socket.io 
 
 # Start the server
-nodemon server.js
+nodemon server.cjs
 
-# Open your browser
+# Ouvrir 2 fenêtres sur :
 # http://localhost:8080
 
 ```
@@ -69,6 +69,7 @@ https://www.youtube.com/watch?v=wR8GSFHJ330
 https://developer.mozilla.org/fr/docs/Web/JavaScript
 https://socket.io/docs/v4/
 https://stackoverflow.com/
+et le cours
 
 
 ## 🛠️ Tech Stack
@@ -80,7 +81,7 @@ https://stackoverflow.com/
 | HTML / CSS      | User interface                                |
 | JavaScript      | Game logic on the client side                 |
 | Node.js         | Backend server                                |
-| Express         | Serves static files (HTML/CSS/JS)            |
+| Express         | Serves/send static files (HTML/CSS/JS)            |
 | Socket.IO       | Handles real-time communication between players |
 
 
