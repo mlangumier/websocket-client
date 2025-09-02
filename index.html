@@ -10,40 +10,49 @@
 
   <body>
     <div id="app">
+
       <div id="game-name">
         <h1 class="neon-text">TIC-TAC-TOE</h1>
       </div>
 
+      <!-- Pseudos des joueurs -->
       <div>
-        <p id="userCont">You: <span id="user"></span></p>
-        <p id="oppNameCont">Opponent: <span id="oppName"></span></p>
+        <p id="userCont">You : <span id="user"></span></p>
+        <p id="oppNameCont">Opponent : <span id="oppName"></span></p>
       </div>
 
-      <p id="valueCont">You are playing as <span id="value"></span></p>
-      <p id="whosTurn">X's Turn</p>
+      <!-- Rappel de qui tu joues (X ou O) -->
+      <p id="valueCont">Your are playing as <span id="value"></span></p>
 
+      <!-- Affichage du tour en cours -->
+      <p id="whosTurn"> X's Turn</p>
+
+      <!-- Input pour entrer son nom avant de lancer la partie -->
       <div class="inputGroup">
-        <p id="enterName">Enter your name: </p>
+        <p id="enterName">Enter your name : </p> 
         <input type="text" placeholder="Name" id="name" autocomplete="off">
         <button id="find" class="startGame">Search for a player</button>
         <img src="loading.gif" class="loading" id="loading" alt="loading">
       </div>
 
+      <!-- les cases du jeu, le board -->
       <div id="bigCont">
         <div id="cont">
-          <button class="btn" id="btn1"></button>
-          <button class="btn" id="btn2"></button>
-          <button class="btn" id="btn3"></button>
-          <button class="btn" id="btn4"></button>
-          <button class="btn" id="btn5"></button>
-          <button class="btn" id="btn6"></button>
-          <button class="btn" id="btn7"></button>
-          <button class="btn" id="btn8"></button>
-          <button class="btn" id="btn9"></button>
+          <button id="btn1" class="btn" name="tic-button"></button>
+          <button id="btn2" class="btn" name="tic-button"></button>
+          <button id="btn3" class="btn" name="tic-button"></button>
+          <button id="btn4" class="btn" name="tic-button"></button>
+          <button id="btn5" class="btn" name="tic-button"></button>
+          <button id="btn6" class="btn" name="tic-button"></button>
+          <button id="btn7" class="btn" name="tic-button"></button>
+          <button id="btn8" class="btn" name="tic-button"></button>
+          <button id="btn9" class="btn" name="tic-button"></button>
         </div>
       </div>
+
     </div>
 
+    <!-- import de Socket.io obligatoire-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="public/client.js"></script>
   </body>

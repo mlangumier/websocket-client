@@ -1,7 +1,7 @@
 const socket = io();
 let playerName = "";
 
-// Initial UI state : show only name input
+// Initial UI state : show only name and search button
 document.getElementById("loading").style.display = "none";
 document.getElementById("bigCont").style.display = "none";
 document.getElementById("userCont").style.display = "none";
