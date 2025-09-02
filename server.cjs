@@ -30,18 +30,23 @@ function checkWinner(board) {
   return board.includes("") ? null : "draw";
 }
 
+// mise en relation des joueurs via le serveur
 io.on("connection", (socket) => {
   socket.on("find", ({ name }) => {
     socket.data.name = name;
 
+    // si y'a pas de joueur en attente on crée la liste d'attente
     if (!waitingPlayer) {
       waitingPlayer = socket;
+    //sinon ça veut dire qu'un joueur attend donc on associe les deux joueurs
     } else {
       const player1 = waitingPlayer;
       const player2 = socket;
       waitingPlayer = null;
 
+      // on crée la grille de jeu
       const board = createBoard();
+      // on fait un objet game qui contient la grille, les joueurs, leur symbol, et le tour en cours
       const game = {
         board,
         players: [player1, player2],
@@ -56,6 +61,7 @@ io.on("connection", (socket) => {
     }
   });
 
+//TODO: finir les commentaires pour expliquer le code
   socket.on("play", ({ cell }) => {
     const game = games.get(socket.id);
     if (!game || game.turn !== socket.id) return;

@@ -1,7 +1,7 @@
 const socket = io();
 let playerName = "";
 
-// Initial UI state
+// Initial UI state : show only name input
 document.getElementById("loading").style.display = "none";
 document.getElementById("bigCont").style.display = "none";
 document.getElementById("userCont").style.display = "none";
@@ -9,7 +9,7 @@ document.getElementById("oppNameCont").style.display = "none";
 document.getElementById("valueCont").style.display = "none";
 document.getElementById("whosTurn").style.display = "none";
 
-// Search for opponent
+// Search for opponent : on click show loading.gif and wait for 2nd player. Disable "search button".
 document.getElementById("find").addEventListener("click", () => {
   const nameInput = document.getElementById("name").value.trim();
   if (!nameInput) return alert("Enter a name");
@@ -28,7 +28,7 @@ socket.on("gameStart", (data) => {
   document.getElementById("value").innerText = symbol;
   document.getElementById("whosTurn").innerText = turn ? "Your Turn" : "Opponent's Turn";
 
-  // Show UI
+  // Show UI when game start then hide name input / search button
   document.getElementById("loading").style.display = "none";
   document.getElementById("name").style.display = "none";
   document.getElementById("find").style.display = "none";
@@ -40,14 +40,14 @@ socket.on("gameStart", (data) => {
   document.getElementById("whosTurn").style.display = "block";
 });
 
-// Click on a cell
+// Click on a button and send wich button was click to the server
 document.querySelectorAll(".btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     socket.emit("play", { name: playerName, cell: btn.id });
   });
 });
 
-// Update board
+// Update board for on both sides
 socket.on("update", ({ board, turn }) => {
   document.getElementById("whosTurn").innerText = turn ? "Your Turn" : "Opponent's Turn";
 
@@ -60,7 +60,7 @@ socket.on("update", ({ board, turn }) => {
   });
 });
 
-// Game over
+// Game over if a player fill win condition or send draw then reload for a new game
 socket.on("gameOver", ({ winner }) => {
   setTimeout(() => {
     alert(winner ? `${winner} WON!` : "DRAW!");
