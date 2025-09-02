@@ -1,13 +1,15 @@
 import "./style.css";
-// import { setupCounter } from "./counter.ts";
-const socket = new WebSocket("ws://localhost:8080");
+import { onMessage,  sendMessage } from "./websocket";
+import { handleGameMessage } from "./game";
 
-const cells = document.querySelectorAll<HTMLButtonElement>("#smallcont .btn");
-let board: string[] = ["", "", "", "", "", "", "", "", ""];
-let mySymbol = "X" ;
-let currentPlayer;
+const playerName = document.getElementById("playerName")?.innerText;
 
+const confirmBtn = document.getElementById("sendMessage");
 
+confirmBtn?.addEventListener("click" ,() => {
+  sendMessage({type : "ADD_PLAYER", content: playerName});
+});
 
-
-
+onMessage(msg => {
+  handleGameMessage(msg);
+});
