@@ -3,200 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="src\style.css">
+    <link rel="stylesheet" href="public/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tic-Tac-Toe Websockets</title>
+    <title>Tic-Tac-Toe WebSockets</title>
   </head>
 
   <body>
     <div id="app">
-
       <div id="game-name">
         <h1 class="neon-text">TIC-TAC-TOE</h1>
       </div>
 
-      <!-- Pseudos des joueurs -->
       <div>
-        <p id="userCont">You : <span id="user"></span></p>
-        <p id="oppNameCont">Opponent : <span id="oppName"></span></p>
+        <p id="userCont">You: <span id="user"></span></p>
+        <p id="oppNameCont">Opponent: <span id="oppName"></span></p>
       </div>
 
-      <!-- Rappel de qui tu joues (X ou O) -->
-      <p id="valueCont">Your are playing as <span id="value"></span></p>
+      <p id="valueCont">You are playing as <span id="value"></span></p>
+      <p id="whosTurn">X's Turn</p>
 
-      <!-- Affichage du tour en cours -->
-      <p id="whosTurn"> X's Turn</p>
-
-      <!-- Input pour entrer son nom avant de lancer la partie -->
       <div class="inputGroup">
-        <p id="enterName">Enter your name : </p> 
+        <p id="enterName">Enter your name: </p>
         <input type="text" placeholder="Name" id="name" autocomplete="off">
         <button id="find" class="startGame">Search for a player</button>
         <img src="loading.gif" class="loading" id="loading" alt="loading">
       </div>
 
-      <!-- les cases du jeu -->
       <div id="bigCont">
         <div id="cont">
-          <button id="btn1" class="btn" name="tictic-button"></button>
-          <button id="btn2" class="btn" name="tictic-button"></button>
-          <button id="btn3" class="btn" name="tictic-button"></button>
-          <button id="btn4" class="btn" name="tictic-button"></button>
-          <button id="btn5" class="btn" name="tictic-button"></button>
-          <button id="btn6" class="btn" name="tictic-button"></button>
-          <button id="btn7" class="btn" name="tictic-button"></button>
-          <button id="btn8" class="btn" name="tictic-button"></button>
-          <button id="btn9" class="btn" name="tictic-button"></button>
+          <button class="btn" id="btn1"></button>
+          <button class="btn" id="btn2"></button>
+          <button class="btn" id="btn3"></button>
+          <button class="btn" id="btn4"></button>
+          <button class="btn" id="btn5"></button>
+          <button class="btn" id="btn6"></button>
+          <button class="btn" id="btn7"></button>
+          <button class="btn" id="btn8"></button>
+          <button class="btn" id="btn9"></button>
         </div>
       </div>
-
     </div>
 
-    <!-- import de Socket.io obligatoire-->
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-
-      // Masquer des trucs au démarrage
-      document.getElementById("loading").style.display="none";
-      document.getElementById("bigCont").style.display="none";
-      document.getElementById("userCont").style.display="none";
-      document.getElementById("oppNameCont").style.display="none";
-      document.getElementById("valueCont").style.display="none";
-      document.getElementById("whosTurn").style.display="none";
-
-      const socket = io();
-      let name;
-
-      // Lancement de la partie avec attente du joueur 2
-      document.getElementById("find").addEventListener("click", function(){
-        name = document.getElementById("name").value;
-        document.getElementById("user").innerText = name;
-
-        if(name == null || name == ''){
-          alert("Enter a name"); // Vérification que le nom n'est pas vide
-        } else {
-          socket.emit("find", {name: name}); // Envoyer le nom au serveur
-          document.getElementById("loading").style.display="block"; // Afficher le loading.gif pour faire patienter le joueur 1
-          document.getElementById("find").disabled = true; // Bloquer le bouton
-        }
-      });
-
-      // récup des joueurs liés au serveur
-      socket.on("find", (e) => {
-
-        let allPlayersArray = e.allPlayers;
-        console.log(allPlayersArray);
-
-        // cache le menu et lance le jeu
-        document.getElementById("userCont").style.display="block";
-        document.getElementById("oppNameCont").style.display="block";
-        document.getElementById("valueCont").style.display="block";
-        document.getElementById("loading").style.display="none";
-        document.getElementById("name").style.display="none";
-        document.getElementById("find").style.display="none";
-        document.getElementById("enterName").style.display="none";
-        document.getElementById("bigCont").style.display="block";
-        document.getElementById("whosTurn").style.display="block";
-        document.getElementById("whosTurn").innerText="X's Turn";
-
-        // nom de l'adversaire + "value" (X ou O)
-        let oppName;
-        let value;
-        const foundObj = allPlayersArray.find(obj =>
-          obj.p1.p1name === name || obj.p2.p2name === name
-        );
-        if (foundObj.p1.p1name === name) {
-          oppName = foundObj.p2.p2name;
-          value = foundObj.p1.p1value;
-        } else {
-          oppName = foundObj.p1.p1name;
-          value = foundObj.p2.p2value;
-        }
-
-        document.getElementById("oppName").innerText = oppName;
-        document.getElementById("value").innerText = value;
-      });
-
-      // Quand un joueur clique sur une case
-      document.querySelectorAll(".btn").forEach(btn => {
-        btn.addEventListener("click", function(){
-          let value = document.getElementById("value").innerText;
-          socket.emit("playing", { value: value, id: btn.id, name: name });
-        });
-      });
-
-      // Quand le serveur renvoie l'état du jeu
-      socket.on("playing", (e) => {
-        const foundObj = e.allPlayers.find(obj =>
-          obj.p1.p1name === name || obj.p2.p2name === name
-        );
-
-        let p1id = foundObj.p1.p1move;
-        let p2id = foundObj.p2.p2move;
-
-        // Gestion du tour : activer uniquement le joueur dont c'est le tour
-        let yourValue = document.getElementById("value").innerText; // X ou O
-        if ((foundObj.sum % 2 === 1 && yourValue === "X") || 
-            (foundObj.sum % 2 === 0 && yourValue === "O")) {
-          document.getElementById("whosTurn").innerText = "Your Turn";
-          document.querySelectorAll(".btn").forEach(btn => {
-            if(btn.innerText === '') btn.disabled = false; // Activer seulement les cases vides
-          });
-        } else {
-          document.getElementById("whosTurn").innerText = "Opponent's Turn";
-          document.querySelectorAll(".btn").forEach(btn => btn.disabled = true);
-        }
-
-        // Remplir les cases déjà jouées et ajouter la classe CSS pour styliser le X ou le O et désactivé une case déjà jouée
-        if(p1id != ''){
-          document.getElementById(`${p1id}`).innerText="X"
-          document.getElementById(`${p1id}`).classList.add("btnx");
-          document.getElementById(`${p1id}`).disabled=true;
-        }
-        if(p2id != ''){
-          document.getElementById(`${p2id}`).innerText="O"
-          document.getElementById(`${p2id}`).classList.add("btno");
-          document.getElementById(`${p2id}`).disabled=true;
-        }
-
-        // Vérifier si quelqu'un a gagné ou match nul
-        check(name, foundObj.sum);
-      });
-
-      // Fonction pour vérifier le gagnant ou match nul
-      function check(name, sum){
-        // Récupération des valeurs des cases
-        document.getElementById("btn1").innerText == '' ? b1 = "a" : b1 = document.getElementById("btn1").innerText
-        document.getElementById("btn2").innerText == '' ? b2 = "b" : b2 = document.getElementById("btn2").innerText
-        document.getElementById("btn3").innerText == '' ? b3 = "c" : b3 = document.getElementById("btn3").innerText
-        document.getElementById("btn4").innerText == '' ? b4 = "d" : b4 = document.getElementById("btn4").innerText
-        document.getElementById("btn5").innerText == '' ? b5 = "e" : b5 = document.getElementById("btn5").innerText
-        document.getElementById("btn6").innerText == '' ? b6 = "f" : b6 = document.getElementById("btn6").innerText
-        document.getElementById("btn7").innerText == '' ? b7 = "g" : b7 = document.getElementById("btn7").innerText
-        document.getElementById("btn8").innerText == '' ? b8 = "h" : b8 = document.getElementById("btn8").innerText
-        document.getElementById("btn9").innerText == '' ? b9 = "i" : b9 = document.getElementById("btn9").innerText
-
-        // Vérifier toutes les combinaisons gagnantes
-        if( (b1==b2 && b2==b3) || (b4==b5 && b5==b6) || (b7==b8 && b8==b9) || 
-            (b1==b4 && b4==b7) || (b2==b5 && b5==b8) || (b3==b6 && b6==b9) || 
-            (b1==b5 && b5==b9) || (b3==b5 && b5==b7) ){
-
-          socket.emit("gameOver", {name:name}); // Informer le serveur
-          setTimeout(()=>{
-            sum%2==0 ? alert("X WON!") : alert("O WON!");
-            setTimeout(()=>{ location.reload() }, 2000); // Recharger la page après 2s
-          },100); // Petit délai pour afficher le dernier coup
-        }
-        else if(sum == 10){ // Match nul
-          socket.emit("gameOver", {name: name});
-          setTimeout(() => {
-            alert("DRAW!!");
-            setTimeout(()=>{ location.reload() }, 2000);
-          }, 100); // Petit délai pour afficher le dernier coup
-        }
-      }
-
-    </script>
-    <script type="module" src="index.cjs"></script>
+    <script src="public/client.js"></script>
   </body>
 </html>
