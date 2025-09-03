@@ -118,4 +118,5 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(8080, () => console.log("Server running on http://localhost:8080")); // le serveur s’ouvre sur le port 8080 et on le précise en console.log pour être sur que la connexion s'est faite
+
+server.listen(8080, () => console.log("Server running on http://localhost:8080")); // on écoute le serveur sur le port 8080 et on console.log pour être sur que la connexion s'est faite
