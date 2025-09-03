@@ -51,6 +51,7 @@ After that, you can start the development server using `npx vite` or `npm run de
 ### Issues
 
 - Game logic -> using multiple tutorials as a basis
+- Structure: where to verify game logic (win/lose/cheating)
 - Frontend/Server communication: what to send and what to receive. Solutions:
   - TypeScript
   - Team communication
