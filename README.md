@@ -4,6 +4,10 @@ A small Tic-Tac-Toe multiplayer game that works with websockets and vanilla Java
 
 ## Setup
 
+This project requires the [websocket-server](https://github.com/mlangumier/websocket-server/) to run.
+
+You can also find the hosted project at [websocket-client-app.vercel.app](https://websocket-client-app.vercel.app/), which is connected to the server.
+
 ### Start the app
 
 After cloning the project, install the dependencies with `npm install`.  
@@ -15,30 +19,53 @@ After that, you can start the development server using `npx vite` or `npm run de
 - Production build: `npx build`
 - Production preview: `npx preview`
 
-## Goals
+## Features
 
-### MVP
-
-- [ ] Frontend/Client (host: Github, Vercel)
-- [ ] Backend/Server (host: CloudFlare?)
-- [ ] Server with 2 players max -> other visitors will get an error
-- [ ] Game actions sent to server & sent to other client to be displayed
-- [ ] Manage victory conditions
-- [ ] Game over: display `alert` with won/lost
+- [x] Frontend/Client (host: Github, Vercel)
+- [x] Backend/Server (host: CloudFlare?)
+- [x] Player names (prompt)
+- [x] Game accepts 2 players -> others are spectator
+- [x] Game actions sent to server & sent to other client to be displayed
+- [x] Manage victory conditions
+- [ ] Game over:
+  - [x] display `alert` with won/lost
   - [ ] Disconnect players
   - [ ] Clean up server: clean up connected clients and game
-  - [ ] -> Allow 2 new players
+  - [x] Allow 2 players
 
-### V1.0
+## WebSockets, JavaScript, Node.js
 
-- [ ] Player names (prompt)
-- [ ] Live chat
-- [ ] Display action history (current game)
-- [ ] Replay game: option to replay game against same opponent
+### WebSocket API & ws
 
-### V2.0
+- `WebSocket API` (frontend): Web API to connect browser & server (communication protocol). Contains `WebSocket`: interface that allows the creation of web socket connections.
+- `ws` (server): same thing, better data transfer, not necessary -> Node.js server can use the `WebSocket API` as well.
 
-- [ ] Database (SQLite, Rxdb): actions, games, scores
-- [ ] Game rooms: multiple game rooms that scale with the number of players
-  - [ ] Step 1: auto-matchmaking
-  - [ ] Step 2: display & join available game rooms, or create one
+-> Both work the same way
+
+### Following guides
+
+- WebSocket vs ws vs Socket.io
+- Node.js vs Express
+- Different logics & setups
+
+### Issues
+
+- Game logic -> using multiple tutorials as a basis
+- Frontend/Server communication: what to send and what to receive. Solutions:
+  - TypeScript
+  - Team communication
+  - Live coding/testing
+
+### Next steps
+
+Other possible features that could use websockets:
+
+- Reset game after "game over"
+- Waiting list
+- Game chat
+- Game rooms: multiple simulatenous games if there are many visitors
+
+### Deployment
+
+- Frontend: `Vercel.com`
+- Server: `Render.com`
